@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contact — The Curator</title>
+<!-- Bootstrap 5 CSS CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    /* Custom CSS */
+    :root {
+        --background: #fcf9f8;
+        --on-surface-variant: #434654;
+        --secondary: #0453cd;
+        --surface-container-low: #f6f3f2;
+        --surface-container-lowest: #ffffff;
+        --on-surface: #1c1b1b;
+        --on-background: #1c1b1b;
+        --outline: #737685;
+        --tertiary-fixed: #8df7c1;
+        --on-tertiary-fixed: #002113;
+        --secondary-container: #356ee7;
+        --on-secondary: #ffffff;
+    }
+    
+    body {
+        background-color: var(--background);
+        color: var(--on-background);
+        font-family: 'Manrope', sans-serif;
+    }
+    
+    h1, h2, h3, .headline-font {
+        font-family: 'Noto Serif', serif;
+    }
+    
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        vertical-align: middle;
+    }
+    
+    /* Navbar */
+    .navbar-custom {
+        background-color: rgba(250, 250, 249, 0.8);
+        backdrop-filter: blur(24px);
+        padding: 1.5rem 0;
+    }
+    
+    .navbar-custom .navbar-brand {
+        font-size: 1.5rem;
+        font-style: italic;
+        color: #1c1917;
+        font-family: 'Noto Serif', serif;
+        text-decoration: none;
+    }
+    
+    .navbar-custom .nav-link {
+        font-size: 0.875rem;
+        letter-spacing: 0.025em;
+        color: #525252;
+        transition: all 0.3s ease;
+        padding: 0.5rem 0;
+    }
+    
+    .navbar-custom .nav-link:hover {
+        color: #1c1917;
+    }
+    
+    .navbar-custom .nav-link.active {
+        color: var(--secondary);
+        font-weight: 600;
+        border-bottom: 1px solid rgba(4, 83, 205, 0.2);
+    }
+    
+    /* Form Styles */
+    .form-group {
+        position: relative;
+        margin-bottom: 3rem;
+    }
+    
+    .form-label {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--outline);
+        margin-bottom: 0.5rem;
+        transition: color 0.3s ease;
+    }
+    
+    .form-group:focus-within .form-label {
+        color: var(--secondary);
+    }
+    
+    .form-input {
+        width: 100%;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid rgba(115, 118, 133, 0.3);
+        padding: 1rem 0;
+        font-size: 1.25rem;
+        color: var(--on-surface);
+        font-weight: 300;
+        outline: none;
+    }
+    
+    .form-textarea {
+        width: 100%;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid rgba(115, 118, 133, 0.3);
+        padding: 1rem 0;
+        font-size: 1.25rem;
+        color: var(--on-surface);
+        font-weight: 300;
+        outline: none;
+        resize: none;
+    }
+    
+    .form-input-line {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(--secondary);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .form-group:focus-within .form-input-line {
+        transform: scaleX(1);
+    }
+    
+    /* Social Links */
+    .social-link {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        color: var(--on-surface);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    
+    .social-link:hover {
+        color: var(--secondary);
+    }
+    
+    .social-link .arrow-icon {
+        opacity: 0;
+        transform: translateX(-0.5rem);
+        transition: all 0.3s ease;
+    }
+    
+    .social-link:hover .arrow-icon {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    
+    /* Contact Card */
+    .contact-card {
+        background-color: var(--surface-container-low);
+        border-radius: 0.75rem;
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .contact-card-bg-icon {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 1rem;
+        opacity: 0.1;
+    }
+    
+    /* Button */
+    .btn-send {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        background-color: var(--secondary);
+        color: var(--on-secondary);
+        padding: 1rem 2.5rem;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        border: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 15px -3px rgba(4, 83, 205, 0.2);
+    }
+    
+    .btn-send:hover {
+        background-color: var(--secondary-container);
+        transform: scale(0.98);
+    }
+    
+    .btn-send:active {
+        transform: scale(0.95);
+    }
+    
+    .btn-send .send-icon {
+        transition: transform 0.3s ease;
+    }
+    
+    .btn-send:hover .send-icon {
+        transform: translateX(0.25rem);
+    }
+    
+    /* Image Hover */
+    .hover-grayscale {
+        filter: grayscale(100%);
+        opacity: 0.4;
+        transition: all 0.7s ease;
+        cursor: crosshair;
+    }
+    
+    .hover-grayscale:hover {
+        filter: grayscale(0%);
+        opacity: 1;
+    }
+    
+    .bg-gradient-to-t {
+        background: linear-gradient(to top, var(--background), transparent);
+    }
+    
+    /* Container */
+    .container-custom {
+        max-width: 1280px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    
+    /* Utility Classes */
+    .bg-secondary { background-color: var(--secondary); }
+    .bg-surface-container-lowest { background-color: var(--surface-container-lowest); }
+    .bg-surface-container-low { background-color: var(--surface-container-low); }
+    .bg-tertiary-fixed { background-color: var(--tertiary-fixed); }
+    .bg-stone-100 { background-color: #f5f5f4; }
+    
+    .text-secondary { color: var(--secondary); }
+    .text-on-secondary { color: var(--on-secondary); }
+    .text-on-surface-variant { color: var(--on-surface-variant); }
+    .text-on-surface { color: var(--on-surface); }
+    .text-on-background { color: var(--on-background); }
+    .text-neutral-500 { color: #737373; }
+    .text-outline { color: var(--outline); }
+    .text-on-tertiary-fixed { color: var(--on-tertiary-fixed); }
+    
+    .border-outline-variant-10 { border-color: rgba(195, 198, 214, 0.1); }
+    
+    .rounded-lg { border-radius: 0.5rem; }
+    .rounded-xl { border-radius: 0.75rem; }
+    .rounded-circle { border-radius: 50%; }
+    
+    .shadow-sm { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
+    
+    .tracking-widest { letter-spacing: 0.1em; }
+    .tracking-tighter { letter-spacing: -0.05em; }
+    
+    .pt-32 { padding-top: 8rem; }
+    .pb-20 { padding-bottom: 5rem; }
+    .py-16 { padding-top: 4rem; padding-bottom: 4rem; }
+    .mt-32 { margin-top: 8rem; }
+    .mt-12 { margin-top: 3rem; }
+    .mb-4 { margin-bottom: 1rem; }
+    .mb-12 { margin-bottom: 3rem; }
+    .p-4 { padding: 1rem; }
+    
+    .fs-1 { font-size: 2.5rem; }
+    .fs-4 { font-size: 1.25rem; }
+    .fs-5 { font-size: 1.125rem; }
+    .small { font-size: 0.875rem; }
+    
+    .fw-semibold { font-weight: 600; }
+    .fw-bold { font-weight: 700; }
+    
+    .position-relative { position: relative; }
+    .position-absolute { position: absolute; }
+    .fixed-top { position: fixed; top: 0; right: 0; left: 0; z-index: 1030; }
+    .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+    .z-10 { z-index: 10; }
+    .z-50 { z-index: 50; }
+    
+    .w-100 { width: 100%; }
+    .h-100 { height: 100%; }
+    .w-20 { width: 5rem; }
+    .h-20 { height: 5rem; }
+    
+    .object-cover { object-fit: cover; }
+    .overflow-hidden { overflow: hidden; }
+    .pointer-events-none { pointer-events: none; }
+    
+    .d-none { display: none; }
+    .d-flex { display: flex; }
+    .flex-column { flex-direction: column; }
+    .flex-wrap { flex-wrap: wrap; }
+    .align-items-center { align-items: center; }
+    .justify-content-center { justify-content: center; }
+    .justify-content-between { justify-content: space-between; }
+    .text-center { text-align: center; }
+    
+    .gap-3 { gap: 0.75rem; }
+    .gap-4 { gap: 1rem; }
+    .gap-5 { gap: 1.5rem; }
+    .gap-8 { gap: 2rem; }
+    
+    @media (min-width: 768px) {
+        .d-md-flex { display: flex; }
+        .p-md-5 { padding: 2rem; }
+        .px-md-6 { padding-left: 4rem; padding-right: 4rem; }
+        .py-md-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+        .flex-md-row { flex-direction: row; }
+        .align-items-md-center { align-items: center; }
+        .justify-content-md-end { justify-content: flex-end; }
+        .text-md-start { text-align: left; }
+    }
+    
+    @media (min-width: 992px) {
+        .col-lg-5 { flex: 0 0 auto; width: 41.66666667%; }
+        .col-lg-7 { flex: 0 0 auto; width: 58.33333333%; }
+        .gap-lg-20 { gap: 5rem; }
+    }
+    
+    .hover-bg-secondary-container:hover { background-color: var(--secondary-container); }
+    .hover-text-blue-700:hover { color: #1d4ed8; }
+    .active-scale-95:active { transform: scale(0.95); }
+    .text-decoration-none { text-decoration: none; }
+    .hover-underline:hover { text-decoration: underline; }
+    .hidden-state { display: none; }
+    .mb-0 { margin-bottom: 0; }
+    .mb-2 { margin-bottom: 0.5rem; }
+    .mt-4 { margin-top: 1rem; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+    .aspect-16-7 { aspect-ratio: 16/7; }
+</style>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar-custom fixed-top w-100 z-50">
+<div class="container-custom d-flex justify-content-between align-items-center fw-bold">
+<a class="navbar-brand fs-2 fst-italic text-neutral-900 tracking-tight headline-font fw-bold" href="#">"Mithun" The Curator</a>
+            <button class="navbar-toggler d-md-none border-0 bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            <div class="collapse d-md-flex align-items-center gap-4 gap-lg-5" id="mainNav">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="About.html">About</a>
+                <a class="nav-link" href="Portfolio.html">Portfolio</a>
+                <a class="nav-link active" href="contact.html">Contact</a>
+                <button class="bg-secondary text-on-secondary px-4 px-md-6 py-2 py-md-3 rounded-lg small fw-semibold border-0 transition-all hover-bg-secondary-container active-scale-95 ms-3 mt-3 mt-md-0">
+                    Get in Touch
+                </button>
+            </div>
+</div>
+</nav>
+
+<main class="pt-32 pb-20">
+<div class="container-custom">
+<div class="row g-5 g-lg-20">
+<!-- Left Column -->
+<div class="col-lg-5 d-flex flex-column justify-content-center">
+<span class="small fw-semibold tracking-widest text-uppercase text-secondary mb-4">Inquiry</span>
+<h1 class="headline-font fw-bold text-on-background" style="font-size: 3rem; line-height: 1.2;">Let's Chat</h1>
+<p class="text-on-surface-variant fs-5 mt-4 mb-5" style="max-width: 400px;">
+    Whether it's a new project, a creative collaboration, or just a coffee, I'm always open to meaningful conversations.
+</p>
+<div class="d-flex flex-column gap-4">
+<div>
+<h3 class="small fw-bold text-uppercase tracking-tighter text-outline mb-3">Digital Presence</h3>
+<div class="d-flex flex-column gap-3">
+<a class="social-link" href="#">
+<span class="material-symbols-outlined text-secondary">link</span>
+<span class="fw-medium">LinkedIn</span>
+<span class="material-symbols-outlined arrow-icon">arrow_outward</span>
+</a>
+<a class="social-link" href="#">
+<span class="material-symbols-outlined text-secondary">terminal</span>
+<span class="fw-medium">GitHub</span>
+<span class="material-symbols-outlined arrow-icon">arrow_outward</span>
+</a>
+<a class="social-link" href="#">
+<span class="material-symbols-outlined text-secondary">brush</span>
+<span class="fw-medium">Dribbble</span>
+<span class="material-symbols-outlined arrow-icon">arrow_outward</span>
+</a>
+</div>
+</div>
+<div class="contact-card">
+<div class="contact-card-bg-icon">
+<span class="material-symbols-outlined fs-1">mail</span>
+</div>
+<h4 class="headline-font fst-italic fs-4 mb-2">Direct Channel</h4>
+<p class="small text-on-surface-variant mb-3">Response time usually within 24 hours.</p>
+<a class="text-secondary fw-semibold text-decoration-none hover-underline" href="mailto:hello@thecurator.com">m.mithun222608@gmail.com</a>
+</div>
+</div>
+</div>
+
+<!-- Right Column - Form -->
+<div class="col-lg-7">
+<div class="bg-surface-container-lowest p-4 p-md-5 rounded-xl shadow-sm border border-outline-variant-10">
+<form action="#" method="post">
+<div class="form-group">
+<label class="form-label" for="name">Name</label>
+<input type="text" class="form-input" id="name" name="name" placeholder="Your Name">
+<div class="form-input-line"></div>
+</div>
+
+<div class="form-group">
+<label class="form-label" for="email">Email Address</label>
+<input type="email" class="form-input" id="email" name="email" placeholder="email@example.com">
+<div class="form-input-line"></div>
+</div>
+
+<div class="form-group">
+<label class="form-label" for="message">Your Message</label>
+<textarea class="form-textarea" id="message" name="message" rows="4" placeholder="How can I help you today?"></textarea>
+<div class="form-input-line"></div>
+</div>
+
+<div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-4 mt-4">
+<p class="small text-on-surface-variant mb-0" style="max-width: 280px;">
+    By submitting this form, you agree to our privacy policy and the storage of your data for communication.
+</p>
+<button type="submit" class="btn-send">
+    Send Message
+    <span class="material-symbols-outlined send-icon">send</span>
+</button>
+</div>
+</form>
+</div>
+
+<!-- Image -->
+<div class="mt-5 rounded-xl overflow-hidden aspect-16-7 position-relative">
+<img alt="Studio environment" class="w-100 h-100 object-cover hover-grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBi7a-L5FbcvcjMhCb-seEZexQBJlsqnuMOts56o0ImjTuJx48GF8yXcBRpVoI0bLaSaqUd62ZeoCp2FctHIO6VhvMzqGcD5-vEJFu5YwE3CARrKnpH-6f5HRucPuyht_v0Yi3SVUl4wR3eZzDsYeduwq0-9GB12aPHrFZlT3fEVl3XQnfFgJNs8uNWoAhSC5XHs_XlAq6ICjCgS-jsojJn1VC1GlP2Oh-RFq9OlB-3IC3Ij1Q4R603qwPj1UCor0-vlfEUSSFy9a1h"/>
+<div class="position-absolute inset-0 bg-gradient-to-t pointer-events-none"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-stone-100 w-100 py-16 mt-32">
+<div class="container-custom d-flex flex-column flex-md-row justify-content-between align-items-center gap-4">
+<div class="small tracking-wide text-neutral-500 mb-0">© 2024 The Digital Curator. All rights reserved.</div>
+<div class="d-flex gap-4 gap-md-5">
+<a class="small tracking-wide text-neutral-500 hover-text-blue-700 transition-all text-decoration-none hover-underline" href="#">LinkedIn</a>
+<a class="small tracking-wide text-neutral-500 hover-text-blue-700 transition-all text-decoration-none hover-underline" href="#">GitHub</a>
+<a class="small tracking-wide text-neutral-500 hover-text-blue-700 transition-all text-decoration-none hover-underline" href="#">Dribbble</a>
+<a class="small tracking-wide text-neutral-500 hover-text-blue-700 transition-all text-decoration-none hover-underline" href="#">Email</a>
+</div>
+</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
