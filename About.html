@@ -116,6 +116,33 @@
     .hover\:grayscale-0:hover { filter: grayscale(0%); }
     
     /* Navbar */
+    /* From Uiverse.io by niat786 */ 
+.get {
+  border-radius: .25rem;
+  text-transform: uppercase;
+  font-style: normal;
+  font-weight: 400;
+  padding-left: 25px;
+  padding-right: 25px;
+  color: #fff;
+  -webkit-clip-path: polygon(0 0,0 0,100% 0,100% 0,100% calc(100% - 15px),calc(100% - 15px) 100%,15px 100%,0 100%);
+  clip-path: polygon(0 0,0 0,100% 0,100% 0,100% calc(100% - 15px),calc(100% - 15px) 100%,15px 100%,0 100%);
+  height: 55px;
+  font-size: 0.7rem;
+  line-height: 14px;
+  letter-spacing: 1.2px;
+  transition: .2s .1s;
+  background-image: linear-gradient(90deg,#1c1c1c,#6220fb);
+  border: 0 solid;
+  overflow: hidden;
+}
+
+.get:hover {
+  cursor: pointer;
+  transition: all .3s ease-in;
+  padding-right: 30px;
+  padding-left: 30px;
+}
     .navbar-custom {
         background-color: rgba(250, 250, 249, 0.8);
         backdrop-filter: blur(24px);
@@ -424,7 +451,7 @@
                 <a class="nav-link active" href="About.html">About</a>
                 <a class="nav-link" href="Portfolio.html">Portfolio</a>
                 <a class="nav-link" href="contact.html">Contact</a>
-                <button class="bg-secondary text-on-secondary px-4 px-md-6 py-2 py-md-3 rounded-lg small fw-semibold transition-all hover-opacity-90 active-scale-95 border-0 ms-3 mt-3 mt-md-0">
+                <button class=" bg-secondary text-on-secondary px-4 px-md-6 py-2 py-md-3 rounded-lg small fw-semibold transition-all hover-opacity-90 active-scale-95 border-0 ms-3 mt-3 mt-md-0">
                     Get in Touch
                 </button>
             </div>
@@ -551,7 +578,7 @@
                         I'm currently open to selective collaborations and senior roles where strategy meets craft.
                     </p>
 <div class="d-flex flex-wrap gap-3">
-<button class="bg-secondary text-on-secondary px-4 px-md-5 py-3 py-md-4 rounded-lg small fw-semibold border-0 transition-all active-scale-95">
+<button class="get fw-bold">
                                 Start a Conversation
                             </button>
 <button class="px-4 px-md-5 py-3 py-md-4 rounded-lg small fw-semibold border border-outline-variant-30 bg-transparent transition-all hover-bg-surface-container-high">
